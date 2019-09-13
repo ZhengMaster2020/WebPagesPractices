@@ -1,0 +1,17 @@
+{
+  "presets": [
+      ["@babel/preset-env", {
+        // 在每个文件中使用polyfill时，为polyfill添加特定导入。利用捆绑器只加载一次相同的polyfil
+        // "useBuiltIns": "usage",
+        "modules": false,
+        "targets": {
+          "browsers": "last 2 version, not ie <=8"
+        }
+      }]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime", {
+      "helpers": false
+    }]
+  ]
+}
