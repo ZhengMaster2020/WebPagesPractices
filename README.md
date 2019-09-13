@@ -1,5 +1,10 @@
+# vue-shop项目使用webpack从零搭建电商项目
+
+##安装包
+
 webpack
 webpack-cli
+webpack-merge
 
 Loader:
 + babel:
