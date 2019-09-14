@@ -11,12 +11,15 @@ module.exports =  {
   output: {
     path: path.resolve(__dirname, '../dist/'),
     filename: '[name].bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [{
       test: /\.vue$/,
       loader: 'vue-loader',
+    },{
+      test:  /iview.src.*?js$/,
+      loader: 'babel-loader'
     },{
       test: /\.js$/,
       loader: 'babel-loader',
