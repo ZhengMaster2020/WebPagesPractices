@@ -1,9 +1,6 @@
 <template>
   <div class="page-header">
     <span>中国大陆</span>
-    <div>
-      <span>username</span>
-    </div>
     <div>购物车</div>
   </div>
 </template>
