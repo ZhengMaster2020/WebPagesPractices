@@ -46,6 +46,7 @@
           <div class="product-list">
             <Row >
               <Col class="list-item" span="6">
+              <div class="add-to-cart" v-show="mouseEnterFlag">加入购物车</div>
                 <div>
                   <img class="img" src="../assets/images/02.png" alt="img">
                   <p class="price">
@@ -135,7 +136,8 @@ export default {
     return {
       show: true,
       search: '',
-      searchVal: ''
+      searchVal: '',
+      mouseEnterFlag: true
     }
   },
   components: {
@@ -144,6 +146,12 @@ export default {
   methods: {
     handleClose () {
         this.show = false;
+    },
+    mouseEnter () {
+      console.log('enter')
+      if ( this.mouserEnterFlag !== true ) {
+        this.mouserEnterFlag = true
+      }
     }
   }
 }
@@ -171,6 +179,17 @@ export default {
   padding: 1px;
   width: 250px;
   border: 1px solid #ededed;
+  position: relative;
+}
+.add-to-cart{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 2px;
+  background: #2d8cf0;
 }
 .list-item:hover{
   border: 1px solid #f40;
