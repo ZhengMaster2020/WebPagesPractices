@@ -4,6 +4,7 @@
     <div>
       <span>username</span>
     </div>
+    <div>购物车</div>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
 <style scoped>
 .page-header{
   height: 36px;
-  background: #3c3c3c;
+  color: #3c3c3c;
+  background: #f5f5f5;
 }
 </style>

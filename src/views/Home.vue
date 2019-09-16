@@ -138,7 +138,9 @@ export default {
       searchVal: ''
     }
   },
-  c
+  components: {
+    PageHeader
+  },
   methods: {
     handleClose () {
         this.show = false;
