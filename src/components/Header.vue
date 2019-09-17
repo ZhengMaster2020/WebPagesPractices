@@ -4,18 +4,20 @@
       <Col span="2">
         <span class="header-location">中国大陆</span>
       </Col>
-      <Col span="18" class="header-title">
+      <Col span="14" class="header-title">
         <router-link to="/">
           <h3>畅品优购，你值得购物的网站</h3>
         </router-link>
       </Col>
-      <Col span="2"> {{username}} </Col>
-      <Col span="2">
+      <Col span="4"> {{username}} </Col>
+      <Col span="4">
       <div class="header-cart" @click="toCart">
-        <a href="#">
+        <a href="javascript:void(0)">
           <Icon type="ios-cart"></Icon>
           购物车
-          <strong class="header-count"> {{count}} </strong>
+          <strong class="header-count">
+            <input type="text" disabled v-model="count">
+          </strong>
         </a>
       </div>
       </Col>
@@ -27,7 +29,7 @@
 export default {
   data () {
     return {
-      count: 10,
+      count: 10333,
       username: 'zhangsan'
     }
   },
@@ -37,6 +39,7 @@ export default {
     },
     fetchData () {
       this.count = this.$store.state.cartCount
+      if (count >999) count = '999+'
     }
   },
   created () {
@@ -46,11 +49,17 @@ export default {
 </script>
 
 <style scoped>
-.header-count{
+.header-count input{
   background: #f40;
   padding: 1px;
   color: #fff;
   border-radius: 25px;
+  min-width: 20px;
+  max-width: 40px;
+  height: 20px;
+  outline: none;
+  border: none;
+  text-align: center;
 }
 .page-header{
   font-size: 12px;

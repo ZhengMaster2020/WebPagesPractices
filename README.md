@@ -40,3 +40,7 @@ plugins:
 + file-loader： [https://github.com/webpack-contrib/file-loader](https://github.com/webpack-contrib/file-loader)
 
 ## webpack配置生产环境与开发环境
+
+1. 前端用户登录Token认证
+2. 购物车数字响应式显示
+3. 图片显示的问题
