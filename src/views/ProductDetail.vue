@@ -42,12 +42,16 @@
                   >honor/荣耀</b>
                 </div>
               </div>
-              <p class="product-attr-list-hd">
-                <a class="product-switch-attr" href="#J_Attrs">
+              <Row class-name="product-attr-list-hd">
+                 <Col span="4"  pull="4">
+                  <strong >产品参数：</strong>
+                </Col>
+                <Col span="4" push="14">
+                  <a class="product-switch-attr" href="javascript:void(0)">
                   更多参数 >
-                </a>
-                <em>产品参数：</em>
-              </p>
+                  </a>
+                </Col>
+              </Row>
               <ul id="J_AttrUL" class="product-attr-ul">
                 <Row>
                 <li title="2019011606194135">证书编号：2019011606194135</li>
@@ -74,7 +78,27 @@
               </ul>
             </div>
           </Tab-pane>
-          <Tab-pane label="规格参数">标签二的内容</Tab-pane>
+          <Tab-pane label="规格参数" style="text-align:start" id="moreProductAttr">
+             <Card>
+                <p slot="title">规格参数</p>
+                <p >
+                  <Card class="card-attr">
+                    <p slot="title" class="card-title">拍照功能</p>
+                      <p class="card-msg">后置摄像头 :	 <strong> 4800万+200万</strong></p>
+                      <p class="card-msg">摄像头类型 :	 <strong> 双摄像头（后双）</strong></p>
+                      <p class="card-msg">视频显示格式 :	 <strong>*.3gp、*.mp4、*.webm、*.mkv</strong> </p>
+                  </Card>
+                </p>
+                <p >
+                  <Card class="card-attr">
+                    <p slot="title" class="card-title">显示</p>
+                      <p class="card-msg">分辨率 :	 <strong> 1080*2340</strong></p>
+                      <p class="card-msg">触摸屏类型	:	 <strong> LTPS </strong></p>
+                      <p class="card-msg">屏幕尺寸 :	 <strong>	 6.59英寸 </strong> </p>
+                  </Card>
+                </p>
+            </Card>
+          </Tab-pane>
         </Tabs>
       </Col>
     </Row>
@@ -92,6 +116,17 @@ export default {
 </script>
 
 <style scoped>
+.card-title{
+  background: #f7f7f7;
+}
+.card-attr .card-msg{
+  margin: 5px;
+  border: 1px solid #dad8d8;
+  padding: 5px 5px 5px 20px;
+  color: #999;
+  font-weight: 400;
+  text-align: left;
+}
 .product-attributes-list li {
   display: inline-block;
   width: 220px;
@@ -104,23 +139,15 @@ export default {
   text-overflow: ellipsis;
   color: #666;
 }
-.product-attributes-list ul {
-  padding: 0 20px 18px;
+.product-attributes-list
+.product-attr-ul {
+  padding: 10px 30px 10px;
+  text-align: start;
   text-indent: 0;
   border-top: 1px solid #fff;
   list-style: none;
-  margin-top: 20px;
-  background: #000
-}
-.product-attr-list-hd em {
-    font-weight: 700;
-    float: left;
-}
-.product-attr-list-hd 
-.product-switch-attr {
-  float: right;
-  height: 20px;
-  line-height: 22px;
+  margin-top: 5px;
+  background: #e9e9e9;
 }
 .product-attr-list-hd{
   padding: 5px 20px;
