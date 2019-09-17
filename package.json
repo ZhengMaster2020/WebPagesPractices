@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "serve": "webpack-dev-server --open --history-api-fallback --config ./config/webpack.dev.js",
+    "dev": "webpack-dev-server --open --history-api-fallback --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
