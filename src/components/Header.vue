@@ -27,14 +27,20 @@
 export default {
   data () {
     return {
-      count: '100',
+      count: 10,
       username: 'zhangsan'
     }
   },
   methods: {
     toCart () {
       this.$router.push('/cart')
+    },
+    fetchData () {
+      this.count = this.$store.state.cartCount
     }
+  },
+  created () {
+    this.fetchData()
   }
 }
 </script>

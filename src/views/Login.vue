@@ -45,15 +45,22 @@ export default {
       }
   },
   methods: {
-      handleSubmit(name) {
-          this.$refs[name].validate((valid) => {
-              if (valid) {
-                  this.$router.push('/')
-              } else {
-                  this.$Message.error('表单验证失败!');
-              }
-          })
+    handleSubmit(name) {
+        this.$refs[name].validate((valid) => {
+            if (valid) {
+              this.checkUserAccount(this.formInline)
+            } else {
+                this.$Message.error('表单验证失败!');
+            }
+        })
+    },
+    checkUserAccount (account) {
+      if (account.user === 'zhangsan' && account.password === '123456') {
+        this.$router.push('/')
+      } else {
+        this.$Message.error('登陆失败')
       }
+    }
   }
 }
 </script>

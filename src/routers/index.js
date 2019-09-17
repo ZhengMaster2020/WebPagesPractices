@@ -7,22 +7,25 @@ const router = new VueRouter({
   routes: [
     { 
       path: '/', 
+      name: 'index',
       meta: { title: '首页' }, 
       component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue')
     },
     { 
       path: '/login', 
+      name: 'login',
       meta: { title: '登录' }, 
-      // component: Login
       component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
     },
     { 
       path: '/cart', 
-      meta: { title: '购物车' }, 
+      name: 'cart',
+      meta: { title: '购物车', requestAuth: true }, 
       component: () => import(/* webpackChunkName: "Cart" */ '../views/Cart.vue')
     },
     { 
       path: '/products/:id', 
+      name: 'products',
       meta: { title: '商品详情' },
       component: () => import(/* webpackChunkName: "ProductDetail" */ '../views/ProductDetail.vue')
     },
@@ -35,8 +38,7 @@ const router = new VueRouter({
 
 // 根据页面不同设计不同的页面标题
 router.beforeEach((to, from, next) => {
-  console.log(`form = ${from.meta.title}  to = ${to.meta.title}`) 
-  to.meta
+  window.document.title = to.meta.title
   next()
 })
 

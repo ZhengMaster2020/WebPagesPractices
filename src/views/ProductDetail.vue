@@ -1,27 +1,35 @@
 <template>
   <div class="product-detail">
+    <PageHeader />
     <Row>
       <Col span="10" class-name="show-picture">
-        <img src="../assets/images/01.png" alt="图片无法显示" />
+        <img src= "../assets/images/01.png" alt="图片无法显示" />
       </Col>
       <Col span="10" class-name="product-title">
-        <h1>【购机送权益礼包】华为科技潮牌/荣耀9X麒麟810芯片4800万超清双摄升降式全面屏全网通智能手机官方旗舰店</h1>
+        <h1>{{product.title}}</h1>
         <Row class-name="product-price">
           促销价:
           <i>￥</i>
-          <span>1399.00-2499.00</span>
+          <span>1399.00- {{product.price}} </span>
         </Row>
         <Row class-name="product-message">
           <Row type="flex" align="middle" justify="center" class-name="product-count">
             <Col span="2">数量：</Col>
             <Col span="8">
-              <Input-number :max="5" :min="1" v-model="value1"></Input-number>&nbsp; &nbsp;件
+              <Input-number 
+                :max="5" 
+                :min="1" 
+                v-model="number"></Input-number>&nbsp; &nbsp;件
             </Col>
-            <Col span="10" pull="2">库存10027件 （每人限购5件）</Col>
+            <Col span="10" pull="2">库存{{product.storeCount}}件 （每人限购5件）</Col>
           </Row>
           <Row class-name="product-tocart">
             <Col>
-              <Button type="error" icon="ios-cart-outline" size="large">加入购物车</Button>
+              <Button 
+                type="error" 
+                icon="ios-cart-outline" 
+                size="large"
+                @click="addToCart()">加入购物车</Button>
             </Col>
           </Row>
         </Row>
@@ -106,11 +114,40 @@
 </template>
 
 <script>
+import PageHeader from "../components/Header.vue"
+
 export default {
   data() {
     return {
-      value1: 1
+      number: 1,
+      product: {
+        title: '',
+        price: '',
+        src: '',
+        storeCount: '10127',
+
+      }
     };
+  },
+  components: {
+    PageHeader
+  },
+  methods: {
+    initProductData () {
+      const productMsg = this.$route.query.item
+      console.log(productMsg)
+      this.product.title = productMsg.title,
+      this.product.price = productMsg.price,
+      this.product.src = productMsg.img
+    },
+    addToCart() {
+      console.log(this.number)
+      this.$store.commit('addCartCount', this.number )
+      this.$Message.success("成功添加至购物车");
+    },
+  },
+  created () {
+    this.initProductData()
   }
 };
 </script>

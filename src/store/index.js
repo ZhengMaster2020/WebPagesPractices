@@ -3,9 +3,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const state = {}
+const state = {
+  cartCount: 0
+}
 
-const mutations = {}
+const mutations = {
+  addCartCount (state, count) {
+    state.cartCount += count
+    console.log(`store.state.cartCount= ${state.cartCount}`)
+  }
+}
 
 const getters = {}
 
