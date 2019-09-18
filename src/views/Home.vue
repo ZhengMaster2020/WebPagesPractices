@@ -52,7 +52,7 @@
               :key="item.pid">
               <div 
                 class="add-to-cart" 
-                @click.stop.prevent="addToCart(1)">加入购物车</div>
+                @click.prevent="addToCart(item.pid)">加入购物车</div>
               <div @click="goToProduct(item)">
                 <img class="img" :src="item.img" alt="img" />
                 <p class="price">
@@ -80,68 +80,8 @@
 
 <script>
 import PageHeader from "../components/Header.vue";
-import ImgUrl_01 from "../assets/images/01.png";
-import ImgUrl_02 from "../assets/images/02.png";
-import ImgUrl_03 from "../assets/images/03.png";
-import ImgUrl_04 from "../assets/images/04.png";
 
-const products = [
-  {
-    pid: "000",
-    title:
-      "【购机送权益礼包】华为科技潮牌/荣耀9X麒麟810芯片4800万超清双摄升降式全面屏",
-    price: "2750.00",
-    payment: "10万+",
-    img: ImgUrl_01,
-    shop: " 荣耀官方旗舰店",
-    location: "广东 深圳",
-    cartFlag: false
-  },
-  {
-    pid: "001",
-    title:
-      "【6期免息】【新色上市】Huawei/华为nova 5 Pro超级夜景4800万AI四摄超级快充",
-    price: "2999.00",
-    payment: "3.5万+",
-    img: ImgUrl_02,
-    shop: "华为官方旗舰店",
-    location: "江苏 南京",
-    cartFlag: false
-  },
-  {
-    pid: "002",
-    title:
-      "【6期免息】Huawei/华为 P30全面屏超感光徕卡三摄变焦双景录像980芯片智能手机",
-    price: "2750.00",
-    payment: "5.5万+",
-    img: ImgUrl_03,
-    shop: "华为官方旗舰店",
-    location: "广东 深圳",
-    cartFlag: false
-  },
-  {
-    pid: "003",
-    title:
-      "【至高直降400 6期免息】OPPO Reno opporeno全面屏正品官方旗舰4800万超清",
-    price: "3688.00",
-    payment: "7500+",
-    img: ImgUrl_04,
-    shop: "oppo官方旗舰店",
-    location: "广东 东莞",
-    cartFlag: false
-  },
-  {
-    pid: "004",
-    title:
-      "【至高直降400 6期免息】OPPO Reno opporeno全面屏正品官方旗舰4800万超清",
-    price: "3688.00",
-    payment: "7500+",
-    img: ImgUrl_04,
-    shop: "oppo官方旗舰店",
-    location: "广东 东莞",
-    cartFlag: false
-  }
-];
+import products from '../mocks/products.js'
 
 export default {
   data() {
@@ -160,8 +100,14 @@ export default {
     handleClose() {
       this.show = false;
     },
-    addToCart(count) {
-      this.$store.commit('addCartCount', count )
+    // 添加至购物车
+    addToCart(pid) {
+      this.$store.commit({
+        type: 'addToCart',
+        product: {
+          pid
+        }
+      })
       this.$Message.success("成功添加至购物车");
     },
     goToProduct (item) {

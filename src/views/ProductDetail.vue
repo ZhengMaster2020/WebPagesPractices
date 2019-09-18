@@ -121,11 +121,11 @@ export default {
     return {
       number: 1,
       product: {
+        pid: '',
         title: '',
         price: '',
         src: '',
         storeCount: '10127',
-
       }
     };
   },
@@ -135,14 +135,19 @@ export default {
   methods: {
     initProductData () {
       const productMsg = this.$route.query.item
-      console.log(productMsg)
+      this.product.pid = productMsg.pid
       this.product.title = productMsg.title,
       this.product.price = productMsg.price,
       this.product.src = productMsg.img
     },
     addToCart() {
-      console.log(this.number)
-      this.$store.commit('addCartCount', this.number )
+      this.$store.commit({
+        type: 'addToCart',
+        product: {
+          number: this.number,
+          pid: this.product.pid
+        }
+      })
       this.$Message.success("成功添加至购物车");
     },
   },

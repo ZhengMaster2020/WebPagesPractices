@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <PageHeader/>
+  <div class="page-cart">
+    <PageHeader class="header"/>
     <div class="cart">
         <div class="cart-header">
             <div class="cart-header-title">购物清单</div>
@@ -15,7 +15,7 @@
         <div class="cart-content">
             <div class="cart-content-main">
                 <div class="cart-info">
-                    <img src="">
+                    <img src="../assets/images/01.png">
                     <span>name</span>
                 </div>
                 <div class="cart-price">¥ 1525</div>
@@ -56,6 +56,7 @@
 </template>
 <script>
 import PageHeader from '../components/Header.vue'
+
 export default {
   components: {
     PageHeader
@@ -90,7 +91,7 @@ export default {
       return {
           productList: 0,
           promotionCode: '',
-          promotion: 0
+          promotion: 0,
       }
   },
   methods: {
@@ -124,6 +125,11 @@ export default {
 }
 </script>
 <style scoped>
+    .page-cart .header {
+        margin: 0 30px;
+        padding: 0 10px;
+        border-radius: 5px;
+    }
     .cart{
       margin: 32px;
       background: #fff;

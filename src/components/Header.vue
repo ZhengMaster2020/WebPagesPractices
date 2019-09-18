@@ -15,8 +15,8 @@
         <a href="javascript:void(0)">
           <Icon type="ios-cart"></Icon>
           购物车
-          <strong class="header-count">
-            <input type="text" disabled v-model="count">
+          <strong class="header-count" v-if="cartList.length" >
+            <input type="text" disabled v-model="cartList.length">
           </strong>
         </a>
       </div>
@@ -29,21 +29,18 @@
 export default {
   data () {
     return {
-      count: 10333,
       username: 'zhangsan'
+    }
+  },
+  computed: {
+    cartList () {
+      return this.$store.state.cartList
     }
   },
   methods: {
     toCart () {
       this.$router.push('/cart')
-    },
-    fetchData () {
-      this.count = this.$store.state.cartCount
-      if (count >999) count = '999+'
     }
-  },
-  created () {
-    this.fetchData()
   }
 }
 </script>
