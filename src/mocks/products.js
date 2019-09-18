@@ -8,7 +8,7 @@ export default [
     pid: "000",
     title:
       "【购机送权益礼包】华为科技潮牌/荣耀9X麒麟810芯片4800万超清双摄升降式全面屏",
-    price: "2750.00",
+    price: 2750.50,
     payment: "10万+",
     img: ImgUrl_01,
     shop: " 荣耀官方旗舰店",
@@ -19,7 +19,7 @@ export default [
     pid: "001",
     title:
       "【6期免息】【新色上市】Huawei/华为nova 5 Pro超级夜景4800万AI四摄超级快充",
-    price: "2999.00",
+    price: "2999.99",
     payment: "3.5万+",
     img: ImgUrl_02,
     shop: "华为官方旗舰店",

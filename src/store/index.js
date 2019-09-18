@@ -9,6 +9,7 @@ const state = {
 }
 
 const mutations = {
+
   // 添加商品到购物车
   addToCart (state, product) {
     let count = 1
@@ -29,8 +30,20 @@ const mutations = {
         count
       })
     }
-    console.log(state.cartList)
-  }
+  },
+
+  // 修改购物车里面商品的数量
+  editCartCount (state, payload) {
+    console.log(payload)
+    const product = state.cartList.find(item => item.pid === payload.pid)
+    product.count += payload.count
+  },
+
+  // 从购物车移除该商品
+  removeCart (state, pid) {
+    const p_index = state.cartList.findIndex()
+    state.cartList.splice(p_index, 1)
+  } 
 }
 
 const getters = {}
