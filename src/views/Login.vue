@@ -85,11 +85,29 @@ export default {
         })
     },
     checkUserAccount (account) {
-      if (account.user === 'zhangsan' && account.password === '123456') {
-        this.$router.push('/')
-      } else {
-        this.$Message.error('登陆失败')
-      }
+      this.$axios.post('http://127.0.0.1:5000/api/login', {
+        user: account
+      })
+        .then(res => {
+          const data = res.data
+          const token = data.token
+          console.log(data)
+          if (data.success) {
+            this.$Message.success('登录 成功')
+            this.$router.push('/')
+          } else {
+            this.$Message.error('登录失败')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          this.$Message.error(err)
+        })
+      // if (account.user === 'zhangsan' && account.password === '123456') {
+      //   this.$router.push('/')
+      // } else {
+      //   this.$Message.error('登陆失败')
+      // }
     }
   }
 }

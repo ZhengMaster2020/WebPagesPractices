@@ -20,7 +20,15 @@ const dev = {
     contentBase: path.join(__dirname, '../dist'),
     compress: true,
     port: 3000,   
-    publicPath: '/'
+    publicPath: '/',
+    proxy: {
+      '/api': {
+        target: 'http:127.0.0.1:5000/api/',
+        pathRewrite: {'^/api': ''},
+        changeOrigin: true,
+        secure: false
+      }
+    }
   },
 }
 
