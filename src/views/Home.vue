@@ -14,42 +14,31 @@
       <Tab-pane label="所有商品">
         <div class="all-sort">
           所有分类 ：
-          <Tag closable>huawei</Tag>
-          <Tag v-if="show" closable @on-close="handleClose">oppo</Tag>
+          <Tag 
+            type="border"
+            color="blue"
+            v-if="show" 
+            closable 
+            @on-close="handleClose">品牌：华为</Tag>
         </div>
         <div class="sort-panel">
-          <div class="sort">
-            品牌 ：
-            <Tag>huawei</Tag>
-            <Tag>vivo</Tag>
+          <div class="sort" v-for="(val, key, index) in phoneParams" :key="index">
+            {{key}} ：
+            <Tag 
+              type="dot"
+              v-for="item in val"
+              :key="item"
+             >{{item}}</Tag>
           </div>
-          <div class="sort">
-            手机类型 ：
-            <Tag>huawei</Tag>
-            <Tag>vivo</Tag>
-          </div>
-          <div class="sort">
-            机身内存ROM ：
-            <Tag>32G</Tag>
-            <Tag>64G</Tag>
-            <Tag>128G</Tag>
-            <Tag>256G</Tag>
-          </div>
-          <div class="sort">
-            运行内存RAM ：
-            <Tag>4G</Tag>
-            <Tag>6G</Tag>
-            <Tag>8G</Tag>
-            <Tag>12G</Tag>
-          </div>
+
         </div>
         <div class="product-list">
           <Row>
             <Col 
               class="list-item" 
               span="6" 
-              v-for="item in products" 
-              :key="item.pid">
+              v-for="(item, index) in products" 
+              :key="index">
               <div 
                 class="add-to-cart" 
                 @click.prevent="addToCart(item.pid)">加入购物车</div>
@@ -72,6 +61,16 @@
             </Col>
           </Row>
         </div>
+        <div class="Pagination">
+         <template>
+          <Page 
+            :total="products.length" 
+            size="small"
+            show-total 
+            show-elevator 
+            show-sizer></Page>
+        </template>
+        </div>
       </Tab-pane>
       <Tab-pane label="二手">暂无此商品，敬请期待</Tab-pane>
     </Tabs>
@@ -91,17 +90,57 @@ export default {
       searchVal: "",
       mouseEnterFlag: false,
       products,
+      phoneParams: {
+        '品牌': [
+          '华为', 
+          'Apple/苹果', 
+          '三星', 
+          'Xiaomi/小米',
+          'vivo',
+          'honor/荣耀',
+          'OPPO',
+          'nubia/努比亚',
+          'OnePlus/一加'
+        ],
+        '手机类型': [
+          '智能手机', 
+          '4G手机',
+          '拍照手机',
+          '音乐手机',
+          '商务手机'
+        ],
+        '运行内存 ROM': [
+          '32GB',
+          '64GB',
+          '128GB',
+          '256GB'
+        ],
+        '机身内存 RAM': [
+          '4GB',
+          '6GB',
+          '8GB',
+          '12GB'
+        ],
+        '手机像素': [
+          '1200万',
+          '2000万',
+          '4800万',
+          '4800万+500万'
+        ]
+      }
     };
   },
   components: {
     PageHeader
   },
   methods: {
-    handleClose() {
+
+    handleClose () {
       this.show = false;
     },
+
     // 添加至购物车
-    addToCart(pid) {
+    addToCart (pid) {
       this.$store.commit({
         type: 'addToCart',
         product: {
@@ -110,6 +149,7 @@ export default {
       })
       this.$Message.success("成功添加至购物车");
     },
+
     goToProduct (item) {
       this.$router.push({
         path: `/products/${item.pid}`,
@@ -133,6 +173,9 @@ export default {
 }
 .sort-panel {
   margin-top: 10px;
+  padding: 5px 10px;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
 }
 .sort {
   margin-top: 10px;
@@ -166,7 +209,7 @@ export default {
   border: 1px solid #f40;
 }
 .product-list {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .img {
   max-width: 250px;
