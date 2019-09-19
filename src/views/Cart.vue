@@ -22,16 +22,19 @@
           <div class="cart-count">
             <span class="cart-control-minus" @click="handleCount(index, -1)">-</span>
             {{item.count}}
-            <span class="cart-control-add" @click="handleCount(index, 1)">+</span>
+            <span
+              class="cart-control-add"
+              @click="handleCount(index, 1)"
+            >+</span>
           </div>
-          <div class="cart-cost">¥ {{ item.count  * productList[item.pid].price }}</div>
+          <div class="cart-cost">¥ {{ item.count * productList[item.pid].price }}</div>
           <div class="cart-delete">
             <span class="cart-control-delete" @click="handleDelete(index)">删除</span>
           </div>
         </div>
         <div class="cart-empty" v-if="!cartList.length">
-            购物车为空
-            <router-link to="/">立马去添加商品</router-link>
+          当前购物车为空
+          <router-link to="/">立马去添加商品</router-link>
         </div>
       </div>
       <div class="cart-promotion" v-show="cartList.length">
@@ -41,15 +44,16 @@
       </div>
       <div class="cart-footer" v-show="true">
         <div class="cart-footer-desc">
-          共计<span>{{countAll}}</span> 件商品
+          共计
+          <span>{{countAll}}</span> 件商品
         </div>
         <div class="cart-footer-desc">
           应付总额
-          <span>{{costAll}}</span>
+          <span>{{costAll - promotion}}</span>
           <br />
           <template v-if="promotion">
             （优惠
-            <span>¥ 16</span>）
+            <span>¥ {{promotion}} </span>）
           </template>
         </div>
         <div class="cart-footer-desc">
@@ -61,7 +65,7 @@
 </template>
 <script>
 import PageHeader from "../components/Header.vue";
-import products from '../mocks/products.js'
+import products from "../mocks/products.js";
 
 export default {
   data() {
@@ -89,7 +93,7 @@ export default {
     },
     // 计算商品的件数
     countAll() {
-      let count = 0
+      let count = 0;
       this.cartList.forEach(item => {
         count += item.count;
       });
@@ -100,13 +104,14 @@ export default {
       this.cartList.forEach(item => {
         cost += parseFloat(this.productList[item.pid].price) * item.count;
       });
-      return cost;
+      // 结算金额保留两位小数
+      return cost.toFixed(2);
     }
   },
   methods: {
     // 增加或减少商品
     handleCount(index, count) {
-        // 购物车的数量不能低于1
+      // 购物车的数量不能低于1
       if (count < 0 && this.cartList[index].count === 1) return;
       this.$store.commit("editCartCount", {
         pid: this.cartList[index].pid,
@@ -115,25 +120,25 @@ export default {
     },
     // 从购物车删除改商品
     handleDelete(index) {
-      this.$store.commit("deleteCart", this.cartList[index].pid);
+      this.$store.commit("removeCart", this.cartList[index].pid);
     },
     // 优惠码验证
     handleCheckCode() {
       if (this.promotionCode === "") {
-        window.alert("请输入优惠码");
+        this.$Message.error("请输入优惠码");
         return;
       }
-      if (this.promotionCode !== "Vue.js") {
-        window.alert("优惠码验证失败");
+      if (this.promotionCode !== "41019") {
+        this.$Message.error("优惠码验证失败");
       } else {
         this.promotion = 500;
       }
     },
     // 结算操作
     handleOrder() {
-      this.$store.dispatch("buy").then(() => {
-        window.alert("购买成功");
-      });
+      this.$store.dispatch("handlePayMoney").then(
+        window.alert("购买成功")
+      )
     }
   }
 };
