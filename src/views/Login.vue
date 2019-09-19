@@ -7,8 +7,8 @@
              <Row type='flex' justify='center' class="code-row-bg">
               <col span="18">
                 <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                  <Form-item prop="user">
-                    <Input type="text" v-model="formInline.user" placeholder="用户名">
+                  <Form-item prop="username">
+                    <Input type="text" v-model="formInline.username" placeholder="用户名">
                         <Icon type="ios-person-outline" slot="prepend"></Icon>
                     </Input>
                   </Form-item><br>
@@ -18,7 +18,7 @@
                     </Input>
                   </Form-item><br>
                   <Form-item prop="password2">
-                    <Input type="password" v-model="formInline.password" placeholder="确认密码">
+                    <Input type="password" v-model="formInline.password2" placeholder="确认密码">
                         <Icon type="ios-lock-outline" slot="prepend"></Icon>
                     </Input>
                   </Form-item><br>
@@ -34,8 +34,8 @@
             <Row type='flex' justify='center' class="code-row-bg">
               <col span="18">
                 <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                    <Form-item prop="user">
-                      <Input type="text" v-model="formInline.user" placeholder="Username">
+                    <Form-item prop="username">
+                      <Input type="text" v-model="formInline.username" placeholder="Username">
                           <Icon type="ios-person-outline" slot="prepend"></Icon>
                       </Input>
                     </Form-item><br>
@@ -60,14 +60,19 @@ export default {
   data () {
       return {
           formInline: {
-              user: '',
-              password: ''
+              username: '',
+              password: '',
+              password2: ''
           },
           ruleInline: {
-              user: [
+              username: [
                   { required: true, message: '请填写用户名', trigger: 'blur' }
               ],
               password: [
+                  { required: true, message: '请填写密码', trigger: 'blur' },
+                  { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+              ],
+              password2: [
                   { required: true, message: '请填写密码', trigger: 'blur' },
                   { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
               ]
@@ -85,29 +90,20 @@ export default {
         })
     },
     checkUserAccount (account) {
-      this.$axios.post('http://127.0.0.1:5000/api/login', {
-        user: account
-      })
+      this.$axios.post('http://127.0.0.1:5000/api/login', account)
         .then(res => {
           const data = res.data
           const token = data.token
-          console.log(data)
           if (data.success) {
-            this.$Message.success('登录 成功')
+            this.$Message.success(data.msg)
             this.$router.push('/')
           } else {
-            this.$Message.error('登录失败')
+            this.$Message.error(data.msg)
           }
         })
         .catch(err => {
-          console.log(err)
           this.$Message.error(err)
         })
-      // if (account.user === 'zhangsan' && account.password === '123456') {
-      //   this.$router.push('/')
-      // } else {
-      //   this.$Message.error('登陆失败')
-      // }
     }
   }
 }

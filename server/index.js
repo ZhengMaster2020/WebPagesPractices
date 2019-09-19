@@ -26,16 +26,26 @@ app.get('/api/login', (req, res) => {
 // 登录处理
 app.post('/api/login', (req, res) => {
   const data = req.body
-  console.log(data)
   res.set('Content-type', 'application/json')
-  res.send({
-    success: true,
-    msg: '验证成功',
-    user: {
-      username: data.username,
-      token: `41019`,
-    }
-  })
+  if (data.username === 'zhangsan' && data.password === '123456') {
+    res.send({
+      success: true,
+      msg: '登录成功',
+      user: {
+        username: data.username,
+        token: `41019`,
+      }
+    })
+  } else {
+    res.send({
+      success: false,
+      msg: '用户名或者密码错误',
+      user: {
+        username: '',
+        token: ''
+      }
+    })
+  }
 })
 
 app.listen('5000', () => {
