@@ -1,4 +1,6 @@
-# vue-shop项目使用webpack从零搭建电商项目
+# vue-shop项目使用webpack从零搭建简单电商项目
+
+使用webpack构建Vue的项目开发环境，
 
 ##安装包
 
