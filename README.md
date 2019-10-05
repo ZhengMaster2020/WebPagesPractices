@@ -3,7 +3,29 @@
 使用webpack构建Vue的项目开发环境，
 
 ## 一、 初始化项目
-1. 新建文件夹名字为`vue-shop`,
+1. 新建文件夹名字为`vue-shop`,然后在该文件夹下打开命令行工具执行`npm init -y `，生成一份**package.json**文件
+
+```bash
+$ npm init -y
+Wrote to C:\Users\zhengmaster\Desktop\Vue\vue-shop\package.json:
+
+{
+  "name": "vue-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+2. 在vue-shop文件下新建`public`、`src`文件夹以及**README.md**文件
+
+
 
 ##安装包
 
@@ -31,7 +53,7 @@ Loader:
   + vue-loader
   + vue-style-loader
   + vue-template-compiler
- 
+
 
 plugins:
 + clean-webpack-plugin
